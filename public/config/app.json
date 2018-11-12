@@ -1,0 +1,21 @@
+{
+    "devtools_port": 9090,
+    "startup_app": {
+        "url": "http://localhost:3000/index.html",
+        "name": "OpenFin Application Wrapper",
+        "uuid": "OF-App-Wraper",
+        "frame": false,
+        "autoShow": true,
+        "defaultWidth": 408,
+        "defaultHeight": 150,
+        "saveWindowState": false,
+        "applicationIcon": "http://localhost:3000/favicon.ico"
+    },
+    "runtime": {
+        "version": "9.61.36.36",
+        "arguments": "--security-realm=OF-TestTemplate"
+    },
+    "shortcut": {
+        "icon": "http://localhost:3000/favicon.ico"
+    }
+}

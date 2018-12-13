@@ -1,18 +1,30 @@
 <html>
     <head>
         <link rel="stylesheet" href="css/main.css">
-        <script src="./scripts/main.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     </head>
     <body>
-        <div id="titleFrame">
-            <div id="titleBar">
-                <p>OpenFin - Application Launcher</p>
-                <img class="titleBarMinimize" onclick="minimiseWindow()" src="../shared/images/minimize.svg" alt="">
-                <img class="titleBarClose" onclick="closeWindow()" src="../shared/images/close-x.svg" alt="">
+        <header>
+                <div id="titleFrame">
+                        <div id="titleBar">
+                            <p>OpenFin - Application Configuration Explorer</p>
+                            <img class="titleBarMinimize" onclick="minimiseWindow()" src="../shared/images/minimize.svg" alt="">
+                            <img class="titleBarClose" onclick="closeWindow()" src="../shared/images/close-x.svg" alt="">
+                        </div>
+                    </div>
+        </header>
+        <main>
+            <div class="content">
+
+                <div class="Launch-Control">
+                        <span>Application URL:</span><input id="urlInput"><button onclick="openUrl()">+</button>
+                </div>
+
+                <div id="Options-Container">
+
+                </div>
             </div>
-        </div>
-        <div class="content">
-            Application URL:<input id="appUrl"><button onclick="openUrl()">+</button>
-        </div>
+        </main>
+        <script src="./scripts/main.js"></script>
     </body>
 </html>

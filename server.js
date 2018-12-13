@@ -1,14 +1,16 @@
-var express = require("express"),
-    http = require("http"),
-    app = express();
+const liveServer = require('live-server');
 const openfinConfigBuilder = require('openfin-config-builder');
 const openfinLauncher = require('openfin-launcher');
 const path = require('path');
-const port = 3000;
+const jsonServer = require('./openfin-manifest-json-server');
 
 let target;
 const configPath = path.resolve('public/config/app.json');
-target = `http://localhost:${ port }`;
+const serverParams = {
+    root: path.resolve('public'),
+    open: false,
+    logLevel: 2
+};
 
 //Update our config and launch openfin.
 function launchOpenFin() {
@@ -25,44 +27,10 @@ function launchOpenFin() {
         .catch(err => console.log(err));
 }
 
-http.createServer(app).listen(port);
-    
-app.use(express.static(__dirname + "/public"));
 
-app.get("/appUrl", function(req, res){
-
-    var appUrl;
-    if(req.query.url.startsWith("http://") || req.query.url.startsWith("https://")){
-        appUrl = req.query.url;
-    }else{
-        appUrl = "http://" + req.query.url;
-    }
-
-    const manifest = 
-    {
-        startup_app: {
-            name:  req.query.url + random(),
-            description: req.query.url,
-            url: appUrl,
-            uuid: req.query.url + random(),
-            autoShow: true
-        },
-        runtime: {
-            version: "stable"
-        },
-        shortcut: {
-            company: "OpenFin",
-            description: "Openfin POC",
-            name: "Openfin POC"
-        }
-    };
-
-    function random() {
-        return "" + Math.random() * 1000;
-    }
-
-    console.log("get: " + req.query);
-    res.send(manifest);
+//Start the server server and launch our app.
+liveServer.start(serverParams).on('listening', () => {
+    const { address, port } = liveServer.server.address();
+    target = `http://localhost:${ port }`;
+    launchOpenFin();
 });
-
-launchOpenFin();
